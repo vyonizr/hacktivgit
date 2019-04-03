@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../styles/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="../styles/index.css">
+  <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <title>Hacktivgit</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Hacktivgit</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" id="home-page-a" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="starred-page-a" href="#">Starred</a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right" id="github-profile">
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container" id="home-page">
+      <div class="container">
+        <h2 class="text-center">Your repositories</h2>
+        <div class="row">
+          <div class="col-3">
+            <h4>Create a repository</h4>
+            <form action="#" id="create-repo-form" method="POST">
+              <div class="form-group">
+                <input type="text" class="form-control" id="create-repo-name-input" placeholder="Repository name">
+                <input type="text" class="form-control" id="create-repo-description-input" placeholder="Repository description">
+              </div>
+              <button id="submit-create-repo-button" type="submit" class="btn btn-outline-primary">Create</button>
+            </form>
+          </div>
+          <div class="col-4">
+              <table class="table" style="width:100%; max-height:300px; overflow:auto">
+              <tbody id="owned-repos-tbody"></tbody>
+            </table>
+          </div>
+          <div class="col-5">col-4</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container" id="starred-page">
+      <div class="container">
+        <h2 class="text-center">Your starred repositories</h2>
+        <div class="row" style="margin-top:3rem">
+          <div class="col-3">
+            <form action="#" id="search-repo-form" method="POST">
+              <div class="form-group">
+                <input type="text" class="form-control" id="search-repo-input" aria-describedby="searchHelp" placeholder="Enter keyword">
+                <small id="searchHelp" class="form-text text-muted">Search repo by its name & description</small>
+              </div>
+              <button id="submit-search-repo-button" type="submit" class="btn btn-outline-primary">Submit</button>
+            </form>
+          </div>
+          <div class="col-4">
+            <table class="table" style="width:100%; max-height:300px; overflow:auto">
+              <tbody id="starred-repos-tbody"></tbody>
+            </table>
+          </div>
+          <div class="col-5">col-4
+            <table class="table" style="width:100%; max-height:300px; overflow:auto">
+              <tbody id="search-stared-repos-result-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script src="../scripts/index.js"></script>
+  </body>
+</html>
