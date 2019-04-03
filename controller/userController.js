@@ -28,6 +28,7 @@ class UserController {
   }
 
   static createARepo(req, res) {
+    console.log(req.body);
     githubAPI.post("/user/repos", {
       name: req.body.name,
       description: req.body.description
@@ -36,7 +37,7 @@ class UserController {
       res.status(response.status).json(response.data)
     })
     .catch(err => {
-      res.status(500).json(err)
+      res.status(500).json(err.data)
     })
   }
 

@@ -86,9 +86,9 @@ $(document).ready(() => {
       $("#starred-repos-tbody").append(
         `<tr>
             <td>
-              <a href="#" id="toggle-status">
-                <strong>${starredRepo.full_name}</strong><br>
-                <small>by ${starredRepo.owner.login}</small>
+              <a href="#" id="starred-repo-a">
+                <strong id="starred-repo-name">${starredRepo.name}</strong><br>
+                <small id="starred-repo-owner">by ${starredRepo.owner.login}</small>
                 <p>${starredRepo.description}</p>
               </a>
             </td>
@@ -100,16 +100,22 @@ $(document).ready(() => {
     console.log("request failed", textStatus);
   })
 
-    let $createRepoNameInput = $("#create-repo-name-input").val()
-    let $createRepoDescriptionInput = $("#create-repo-description-input").val()
-    console.log($createRepoDescriptionInput);
-
-  $("#submit-create-repo-button").on("click", () => {
-    console.log("ASIK ASIK JOS");
+  $("#starred-repo-a").on("click", () => {
+    $.ajax({
+      url: "http://localhost:3000/api/repos/starred/${",
+      method: "POST",
+      data: {
+        name: $createRepoNameInput,
+        description: $createRepoDescriptionInput
+      }
+    })
   })
 
+    let $createRepoNameInput = $("#create-repo-name-input").val()
+    let $createRepoDescriptionInput = $("#create-repo-description-input").val()
+
   $("#submit-create-repo-button").on("click", () => {
-    console.log("MASUSUUKKK");
+    console.log($createRepoNameInput);
     $.ajax({
       url: "http://localhost:3000/api/repos",
       method: "POST",

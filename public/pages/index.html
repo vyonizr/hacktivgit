@@ -39,15 +39,15 @@
     <div class="container" id="home-page">
       <div class="container">
         <h2 class="text-center">Your repositories</h2>
-        <div class="row">
+        <div class="row" style="margin-top:3rem">
           <div class="col-3">
             <h4>Create a repository</h4>
             <form id="create-repo-form" method="POST">
               <div class="form-group">
-                <input type="text" class="form-control" id="create-repo-name-input" placeholder="Name">
+                <input type="text" class="form-control" id="create-repo-name-input" name="name" placeholder="Name" required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="create-repo-description-input" placeholder="Description">
+                <input type="text" class="form-control" id="create-repo-description-input" name="description" placeholder="Description" required>
               </div>
               <button id="submit-create-repo-button" type="submit" class="btn btn-primary">Create</button>
             </form>
@@ -57,7 +57,7 @@
             <tbody id="owned-repos-tbody"></tbody>
             </table>
           </div>
-          <div class="col-5">col-4</div>
+          <div class="col-5"></div>
         </div>
       </div>
     </div>
@@ -69,7 +69,7 @@
           <div class="col-3">
             <form id="search-repo-form" method="GET">
               <div class="form-group">
-                <input type="text" class="form-control" id="search-repo-input" aria-describedby="searchHelp" placeholder="Enter keyword">
+                <input type="text" class="form-control" id="search-repo-input" aria-describedby="searchHelp" placeholder="Search">
                 <small id="searchHelp" class="form-text text-muted">Search your starred repo by its name or description</small>
               </div>
               <button id="submit-search-repo-button" type="submit" class="btn btn-outline-primary">Submit</button>
@@ -83,7 +83,7 @@
               <tbody id="search-stared-repos-result-tbody"></tbody>
             </table>
           </div>
-          <div class="col-5">col-4
+          <div class="col-5">
           </div>
         </div>
       </div>
