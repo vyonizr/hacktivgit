@@ -64,7 +64,7 @@ class UserController {
     githubAPI.get("/user/starred")
     .then(response => {
       let regex = new RegExp(req.query.q, "gi");
-      let filtered = response.data.find(starredRepo => starredRepo.name.match(regex) || starredRepo.description.match(regex) || starredRepo.full_name.match(regex))
+      let filtered = response.data.filter(starredRepo => starredRepo.name.match(regex) || starredRepo.description.match(regex) || starredRepo.full_name.match(regex))
       res.status(response.status).json(filtered)
     })
     .catch(err => {
