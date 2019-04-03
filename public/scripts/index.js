@@ -17,17 +17,49 @@ $(document).ready(() => {
     $("#home-page").show()
   })
 
+  $.ajax({
+    url: "http://localhost:3000/api/",
+    method: "GET"
+  })
+  .then(function(profile) {
+    $("#username").prepend(`${profile.login}`)
+    $("#avatar").prepend(`
+      <img src="${profile.avatar_url}" role="img" width="30" height="30" alt="" id="avatar">`)
+
+    return $.ajax({
+      url: `http://localhost:3000/api/repos/user/${profile.login}`,
+      method: "GET"
+    })
+  })
+  .then(function(repos) {
+    repos.forEach(repo => {
+      $("#owned-repos-tbody").append(
+        `<tr>
+            <td>
+              <a href="#">
+                <strong>${repo.full_name}</strong><br>
+              </a>
+            </td>
+        </tr>`
+      )
+    })
+  })
+  .fail(function(jqXHR, textStatus) {
+    console.log("request failed", textStatus);
+  })
+
+  let $searchRepoInput = $("#search-repo-input").val()
   $("#submit-search-repo-button").on("click", () => {
     $.ajax({
-      url: "http://localhost:3000/api/repos/starred?",
-      method: "GET",
-      data: {
-        q: search-repo-input
-      }
+      url: `http://localhost:3000/api/repos/starred/search?q=${$searchRepoInput}`,
+      method: "GET"
     })
     .done(function(foundRepos) {
+      $("#starred-repos-tbody").hide()
+      $("#search-stared-repos-result-tbody").show()
+
       foundRepos.forEach(foundRepos => {
-        $("search-stared-repos-result-tbody").append(
+        $("#search-stared-repos-result-tbody").append(
           `<tr>
               <td>
                 <a href="#" id="toggle-status">
@@ -54,9 +86,9 @@ $(document).ready(() => {
       $("#starred-repos-tbody").append(
         `<tr>
             <td>
-              <a href="#" id="toggle-status">
-                <strong>${starredRepo.full_name}</strong><br>
-                <small>by ${starredRepo.owner.login}</small>
+              <a href="#" id="starred-repo-a">
+                <strong id="starred-repo-name">${starredRepo.name}</strong><br>
+                <small id="starred-repo-owner">by ${starredRepo.owner.login}</small>
                 <p>${starredRepo.description}</p>
               </a>
             </td>
@@ -68,42 +100,34 @@ $(document).ready(() => {
     console.log("request failed", textStatus);
   })
 
-  $.ajax({
-    url: "http://localhost:3000/api/repos",
-    method: "GET"
-  })
-  .done(function(repos) {
-    repos.forEach(repo => {
-      $("#owned-repos-tbody").append(
-        `<tr>
-            <td>
-              <a href="#">
-                <strong>${repo.full_name}</strong><br>
-              </a>
-            </td>
-        </tr>`
-      )
+  $("#starred-repo-a").on("click", () => {
+    $.ajax({
+      url: "http://localhost:3000/api/repos/starred/${",
+      method: "POST",
+      data: {
+        name: $createRepoNameInput,
+        description: $createRepoDescriptionInput
+      }
     })
   })
-  .fail(function(jqXHR, textStatus) {
-    console.log("request failed", textStatus);
-  })
 
-  $.ajax({
-    url: "http://localhost:3000/api/",
-    method: "GET"
-  })
-  .done(function(profile) {
-    $("#github-profile").prepend(`
-    <li class="nav-item">
-      <a class="nav-link" href="#">${profile.login}</a>
-    </li>`)
-    $("#github-profile").prepend(`
-    <li class="nav-item">
-      <img src="${profile.avatar_url}" role="img" width="30" height="30" alt="">
-    </li>`)
-  })
-  .fail(function(jqXHR, textStatus) {
-    console.log("request failed", textStatus);
+    let $createRepoNameInput = $("#create-repo-name-input").val()
+    let $createRepoDescriptionInput = $("#create-repo-description-input").val()
+
+  $("#submit-create-repo-button").on("click", () => {
+    console.log($createRepoNameInput);
+    $.ajax({
+      url: "http://localhost:3000/api/repos",
+      method: "POST",
+      data: {
+        name: $createRepoNameInput,
+        description: $createRepoDescriptionInput
+      }
+    })
+    .done(function(starredRepos) {
+    })
+    .fail(function(jqXHR, textStatus) {
+      console.log("request failed", textStatus);
+    })
   })
 })

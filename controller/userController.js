@@ -28,6 +28,7 @@ class UserController {
   }
 
   static createARepo(req, res) {
+    console.log(req.body);
     githubAPI.post("/user/repos", {
       name: req.body.name,
       description: req.body.description
@@ -36,7 +37,7 @@ class UserController {
       res.status(response.status).json(response.data)
     })
     .catch(err => {
-      res.status(500).json(err)
+      res.status(500).json(err.data)
     })
   }
 
@@ -64,7 +65,7 @@ class UserController {
     githubAPI.get("/user/starred")
     .then(response => {
       let regex = new RegExp(req.query.q, "gi");
-      let filtered = response.data.find(starredRepo => starredRepo.name.match(regex) || starredRepo.description.match(regex) || starredRepo.full_name.match(regex))
+      let filtered = response.data.filter(starredRepo => starredRepo.name.match(regex) || starredRepo.description.match(regex) || starredRepo.full_name.match(regex))
       res.status(response.status).json(filtered)
     })
     .catch(err => {
