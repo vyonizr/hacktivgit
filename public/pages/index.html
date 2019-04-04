@@ -25,6 +25,9 @@
           <li class="nav-item">
             <a class="nav-link" id="starred-page-a" href="#">Starred</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" id="search-page-a" href="#">Search</a>
+          </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right" id="github-profile">
@@ -67,12 +70,12 @@
         <h2 class="text-center">Your starred repositories</h2>
         <div class="row" style="margin-top:3rem">
           <div class="col-3">
-            <form id="search-repo-form" method="GET">
+            <form id="search-starred-repo-form" method="GET">
               <div class="form-group">
-                <input type="text" class="form-control" id="search-repo-input" aria-describedby="searchHelp" placeholder="Search">
-                <small id="searchHelp" class="form-text text-muted">Search your starred repo by its name or description</small>
+                <input type="text" class="form-control" id="search-starred-repo-input" aria-describedby="searchHelp" placeholder="Search">
+                <small id="searchHelp" class="form-text text-muted">Find your starred repo by its name or description</small>
               </div>
-              <button id="submit-search-repo-button" type="submit" class="btn btn-outline-primary">Submit</button>
+              <button id="submit-search-starred-repo-button" type="submit" class="btn btn-outline-primary">Submit</button>
             </form>
           </div>
           <div class="col-4">
@@ -80,9 +83,35 @@
               <tbody id="starred-repos-tbody"></tbody>
             </table>
             <table class="table" style="width:100%; max-height:300px; overflow:auto">
-              <tbody id="search-stared-repos-result-tbody"></tbody>
+              <tbody id="search-starred-repos-result-tbody"></tbody>
             </table>
           </div>
+          <div class="col-5">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" id="search-page">
+      <div class="container">
+        <h2 class="text-center">Search Repository</h2>
+
+        <div class="row" style="margin-top:3rem">
+          <div class="col-3">
+            <form id="search-repo-form" method="GET">
+              <div class="form-group">
+                <input type="text" class="form-control" id="search-repo-input" aria-describedby="searchHelp" placeholder="Username">
+              </div>
+              <button id="submit-search-repo-button" type="submit" class="btn btn-outline-primary">Submit</button>
+            </form>
+          </div>
+
+          <div class="col-4">
+            <table class="table" style="width:100%; max-height:300px; overflow:auto">
+              <tbody id="search-repos-result-tbody"></tbody>
+            </table>
+          </div>
+
           <div class="col-5">
           </div>
         </div>
